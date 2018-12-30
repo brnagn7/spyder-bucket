@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Python Open Weather Map Application</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+	<header class="header">
+	<h1>Spyderops Designs</h1>
+		<h2>A fully responsive site using CSS Grid</h2>
+	</header>
+	<div class="topnav" id="topBar">
+	<a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+		<a href="#" class="news"><i class="fas fa-newspaper"></i> News</a>
+		<a href="#" class="contact"><i class="fas fa-envelope-square"></i> Contact</a>
+		<a href="#" class="about"><i class="fas fa-user"></i> About</a>
+				<div class="search-container">
+				<input type="text" placeholder="Search..">
+				<button type="submit">Go</button>
+				<a href="javascript:void(0);" class="icon" onClick="hamburger()">More</a>
+				</div><!-- search-container -->
+	</div><!-- topnav -->
+	<!-- main finishes just above the footer - way on down there :) -->
+	<main class=".grid-container .single-page-gc">
+
+	<section class="post">
+		<div class="card">
+		<!-- post item -->
+				<div class="single-page-post-item">
+				  <div>
+					<h1 id="top">Create a Weather Application Using Python</h1>
+                    <div class="thumbnail single-page-tn"><img class="left" src="assets/images/python-sm.jpg"/></div>
+					<div class="separator"></div>
+                    <p>This turns out to be a lot of fun, I enjoyed using python and there are numerous ways to output the weather data, just head on over to <a href="http://www.openweathermap.org">www.openweathermap.org</a>.
+                    The screenshot below is the applicaiton running, you just type <code>python weather.py</code> and the application asks you which town and state. I just put in the Town below which is good enough to get the idea. Your milage may vary depending on how much skill you have because you need to install <code>pywom</code> the python import needed to parse openweathermap data.</p>
+<div class="page-thumbnail"><img src="assets/images/weather-py.png" alt="python script"></div>
+<p>And here's the code.</p>
+<pre>
+        #
+        # File: weather.py
+        #
+        # Desc: This file pulls data from Open Weather Map
+        # and parses the data nicely with color.
+        #
+        # Usage: python weather.py
+        #
+        # Version: 1.0
+        #
+        # Date: 23 DEC 2018
+        #
+        # TODO : Test the input of 'raw_input' and work out why it throws an error when input is both
+        #        a Town and a State. So far it works just fine with 'Town'.
+        #        Todo Truly Amazing Things:)
+        
+        # pip install pyowm
+
+        import pyowm
+        
+        # constants
+        YELLOW = ('\033[1;33m')
+        RED = ('\033[1;31m')
+        MAGENTA = ('\033[1;35m')
+        BLUE = ('\033[1;34m')
+        GREEN = ('\033[1;32m')
+        END = ('\033[1;m')
+        
+        # you need to sign up for your onw API key
+        owm = pyowm.OWM('you need to put your own API key in here')
+
+        town = raw_input("Enter the Town and State ")
+        obs = owm.weather_at_place(town)
+        w = obs.get_weather()
+        wind = w.get_wind()
+        speed = wind['speed']
+        tempc = w.get_temperature('celsius')
+        tempf = w.get_temperature('fahrenheit')
+        maxc = tempc[‘temp_max’] minc = tempc[‘temp_min’] 
+        maxf = tempf[‘temp_max’] minf = tempf[‘temp_min’] 
+        tomorrow = pyowm.timeutils.tomorrow()
+        city = obs.get_location()
+        stat = w.get_detailed_status()
+#print (w)
+#print (wind)
+#print (temp)
+#print (tomorrow)
+#print (city.get_name())
+print (“\n”)
+#
+# you can get your own ASCII art here
+# http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something
+#
+print GREEN + ” ”
+
+YOUR ASCII ART GOES HERE
+
+print (“\n”)
+print ” ########################### \033[1;31m{0}\033[1;m #########################”.format(city.get_name())
+print (“\n”)
+print (MAGENTA + “The General weather conditions are ({0})”.format(stat))
+print (YELLOW + “The Max Temp in Centigrade is {0} C – with a Minimum today of {1} C”.format(maxc, minc)) + END
+print (BLUE + “The Max Temp in Fahrenheit is {0} F – with a Minimum today of {1} F”.format(maxf, minf)) + END
+print (MAGENTA + “The wind speed is {0}”.format(speed)) + END
+print (“\n”)
+
+# ——————————- EOF ——————————- #
+</pre>
+				  </div>
+				</div>
+		<!-- post item -->
+		</div><!-- card -->
+		<hr>
+	</main><!-- see, told you ! -->
+	<footer class="footer">Footer</footer>
+	<!-- good practice to put your JS down here -->
+	<script src="assets/js/functions.js"></script>
+</body>
+</html>

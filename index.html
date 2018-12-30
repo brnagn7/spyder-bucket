@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Spyderops</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="stylesheet" href="assets/css/reset.css"> -->
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body>
+	<header class="header">
+	<h1>Spyderops Designs</h1>
+		<h2>A fully responsive site using CSS Grid</h2>
+	</header>
+	<div class="topnav" id="topBar">
+	<a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+		<a href="#" class="news"><i class="fas fa-newspaper"></i> News</a>
+		<a href="#" class="contact"><i class="fas fa-envelope-square"></i> Contact</a>
+		<a href="#" class="about"><i class="fas fa-user"></i> About</a>
+				<div class="search-container">
+				<input type="text" placeholder="Search..">
+				<button type="submit">Go</button>
+				<a href="javascript:void(0);" class="icon" onClick="hamburger()">More</a>
+				</div><!-- search-container -->
+	</div><!-- topnav -->
+	<!-- main finishes just above the footer - way on down there :) -->
+	<main class="grid-container">
+	<section class="grid-item">
+		<h2>Journey</h2>
+		<div class="card">
+			<h2>Design Notes</h2>
+			<img src="assets/images/notepad.jpg" width="200px" height="200px" alt="notebook">
+			<div class="content">
+			<p>This site is served from an AWS Bucket. My journey into serverless coding has begun!</p>
+			</div><!-- content -->
+			<footer>I have a footer</footer>
+		</div><!-- card -->
+	</section><!-- grid-item -->
+	<section class="post">
+		<div class="card">
+		<!-- post item -->
+				<div class="post-item">
+				  <div class="thumbnail"><img class="left" src="assets/images/python-sm.jpg"/></div>
+				  <div class="right">
+					<a href="python-owm.html#top"><h1>Create a Weather Application Using Python</h1></a>
+					<div class="author"><img src="assets/images/Eddie.png"/>
+					  <h2>Edward Mooney</h2>
+					</div>
+					<div class="separator"></div>
+					<p>I’ve been getting back into python recently and have written a very simple weather appplication. The application will use the data it retrieves from <a href="http://www.openweathermap.org">www.openweathermap.org</a>. I tweeked the code a bit to make the output look readable.</p>
+				  </div>
+				  <h5>12</h5>
+				  <h6>JANUARY</h6>
+				  <ul>
+					<li><i class="far fa-envelope fa-2x"></i></li>
+				  </ul>
+				  <div class="fab"><a href="python-owm.html#top"><i class="fa fa-book-reader fa-3x"> </i></a></div>
+				</div>
+		<!-- post item -->
+		</div><!-- card -->
+		<hr>
+	<section class="post">
+		<div class="card">
+		<!-- post item -->
+				<div class="post-item">
+				  <div class="thumbnail"><img class="left" src="assets/images/wifi-sm.jpg"/></div>
+				  <div class="right">
+					<h1>Using SSH to Secure WiFi</h1>
+					<div class="author"><img src="assets/images/Eddie.png"/>
+					  <h2>Edward Mooney</h2>
+					</div>
+					<div class="separator"></div>
+					<p>I took a trip to MacDonalds recently to test out my SSH (Secure Shell) configuration. Before leaving home I had opened up access to my home network by tweeking the home router configuration. Once I did that I set off to MacDonalds for a little test. Once there I fired up the laptop and jumped on the free WiFi. What I discovered was ...</p>
+				  </div>
+				  <h5>12</h5>
+				  <h6>JANUARY</h6>
+				  <ul>
+					<li><i class="far fa-envelope fa-2x"></i></li>
+				  </ul>
+				  <div class="fab"><i class="fa fa-book-reader fa-3x"> </i></div>
+				</div>
+		<!-- post item -->
+		</div><!-- card -->
+		<hr>
+	<section class="post">
+		<div class="card">
+		<!-- post item -->
+				<div class="post-item">
+				  <div class="thumbnail"><img class="left" src="assets/images/router-sm.jpg"/></div>
+				  <div class="right">
+					<h1>Learn How to Use PPP (Point-to-Point Protocol)</h1>
+					<div class="author"><img src="assets/images/Eddie.png"/>
+					  <h2>Edward Mooney</h2>
+					</div>
+					<div class="separator"></div>
+					<p>PPP (point-to-point protocol) authentication is possible through one of two methods. PAP (Password Authentication Protocol) and CHAP (Challenge Handshake Authentication Protocol). Of the two, PAP is the easiest to implement and understand but has it’s limits due to the fact that it transmits it’s password in clear text. </p>
+				  </div>
+				  <h5>12</h5>
+				  <h6>JANUARY</h6>
+				  <ul>
+					<li><i class="far fa-envelope fa-2x"></i></li>
+				  </ul>
+				  <div class="fab"><i class="fa fa-book-reader fa-3x"> </i></div>
+				</div>
+		<!-- post item -->
+		</div><!-- card -->
+		<hr>
+		<section class="post">
+			<div class="card">
+			<!-- post item -->
+					<div class="post-item">
+						<div class="thumbnail"><img class="left" src="assets/images/switch-sm.jpg"/></div>
+						<div class="right">
+						<h1>Layer 2 Attacks and How They Work</h1>
+						<div class="author"><img src="assets/images/Eddie.png"/>
+							<h2>Edward Mooney</h2>
+						</div>
+						<div class="separator"></div>
+						<p>How can you defend your network at Layer 2? This is where network switches operate. They have one big vulnerability, and that is the Mac Address Table. If we can fool the switch into thinking we are a legitimate host just passing through, then . . .   </p>
+						</div>
+						<h5>12</h5>
+						<h6>JANUARY</h6>
+						<ul>
+						<li><i class="far fa-envelope fa-2x"></i></li>
+						</ul>
+						<div class="fab"><i class="fa fa-book-reader fa-3x"> </i></div>
+					</div>
+			<!-- post item -->
+			</div><!-- card -->
+			<hr>
+			<section class="post">
+				<div class="card">
+				<!-- post item -->
+						<div class="post-item">
+							<div class="thumbnail"><img class="left" src="assets/images/gringo-sm.jpg"/></div>
+							<div class="right">
+							<h1>ARP and DNS Spoofing</h1>
+							<div class="author"><img src="assets/images/Eddie.png"/>
+								<h2>Edward Mooney</h2>
+							</div>
+							<div class="separator"></div>
+							<p>Address Resolution Protocol (ARP) and Domain Name Service (DNS), are susceptible to spoofing attacks. One reason is ARP has no authentication and so you can just walk on in to the network. Let's see how this is done with a simple example . . .</p>
+							</div>
+							<h5>12</h5>
+							<h6>JANUARY</h6>
+							<ul>
+							<li><i class="far fa-envelope fa-2x"></i></li>
+							</ul>
+							<div class="fab"><i class="fa fa-book-reader fa-3x"> </i></div>
+						</div>
+				<!-- post item -->
+				</div><!-- card -->
+				<hr>
+	<!-- Pagination Code -->
+		    <nav class="pagination-nav" aria-label="pagination-nav">
+        <ul class="pagination">
+            <li><a href="spyder-3.html"><span aria-hidden="true">&laquo;</span><span class="visuallyhidden">previous set of pages</span></a></li>
+			<li><a href="spyder-3.html#post-1"><span class="visuallyhidden">page </span>1</a></li>
+            <li><a href="posts-2.html" aria-current="page"><span class="visuallyhidden">page </span>2</a></li>
+            <li><a href=""><span class="visuallyhidden">page </span>3</a></li>
+            <li><a href=""><span class="visuallyhidden">page </span>4</a></li>
+            <li><a href=""><span class="visuallyhidden">next set of pages</span><span aria-hidden="true">&raquo;</span></a></li>
+        </ul>
+    </nav>
+	<!-- End pagination Code -->
+		</section>
+	</main><!-- see, told you ! -->
+	<footer class="footer">Footer</footer>
+	<!-- good practice to put your JS down here -->
+	<script src="assets/js/functions.js"></script>
+</body>
+</html>
