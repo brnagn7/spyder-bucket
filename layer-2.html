@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Layer 2 Attacks</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+	<header class="header">
+	<h1>Spyderops Designs</h1>
+		<h2>A fully responsive site using CSS Grid</h2>
+	</header>
+	<div class="topnav" id="topBar">
+	<a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+		<a href="#" class="news"><i class="fas fa-newspaper"></i> News</a>
+		<a href="#" class="contact"><i class="fas fa-envelope-square"></i> Contact</a>
+		<a href="#" class="about"><i class="fas fa-user"></i> About</a>
+				<div class="search-container">
+				<input type="text" placeholder="Search..">
+				<button type="submit">Go</button>
+				<a href="javascript:void(0);" class="icon" onClick="hamburger()">More</a>
+				</div><!-- search-container -->
+	</div><!-- topnav -->
+	<!-- main finishes just above the footer - way on down there :) -->
+	<main class=".grid-container .single-page-gc">
+
+	<section class="post">
+		<div class="card">
+		<!-- post item -->
+				<div class="single-page-post-item">
+				  <div>
+                    <h1 id="top">Layer 2 Attacks and How They Work</h1>
+                    <div class="thumbnail single-page-tn"><img class="left" src="assets/images/switch-sm.jpg"/></div>
+                    <div class="separator"></div>
+                    <h1>Switches</h1>
+                    <h3>How can I defend against them?</h3>
+                    <p>When speaking about layer 2 attacks we are talking about the <b>Data Link Layer</b> of the OSI Model where Frames are encapsulated. Since switches operate at layer 2 and work with Frames we will look at mitigating attacks against layer 2 and go over some best practices for securing the layer 2 network. You may have heard of a few of the terms in this post such as <b>VLAN Hopping</b>, or <b>SPT (Spanning Tree Protocol)</b>, and <b>DCHP (Dynamic Host Configuration Protocol)</b> and so on. Now all these protocols are up for attack all day long. You cannot stop a determined attack but you can make it harder, or as I like to say, have the network behave in a "nothing to see here, move along" mode.</p>
+                    <h3>How does a switch</a> work?</h3>
+                    <p>Good question, well let's see.</p>
+                    <ul>
+                    <li>First, they learn the MAC address of connected devices</li>
+                    <li>Incoming frames will either be forwarded if the MAC is known or flooded (sent out all other ports) if not</li>
+                    <li>Flooding will only occur is the MAC is not known or is a broadcast address</li>
+                    <li>VLANs (Virtual LANs) can be setup to group ports</li>
+                    <li>VLANs can be used to communicate to other VLANs</li>
+                    </ul>
+                    <h3>VLAN Hopping, really, what's that?</h3>
+                    <p><img src="assets/images/kangaroo.jpg" alt="kangaroo"><br />VLAN hopping allows network traffic passing through a switch from one VLAN to into another VLAN before being sent to the destination device. It's kind of like jumping inside the Frame as it passes and sneaking a ride to the other normally inaccessible VLAN. We can hop in one of two ways, <i>switch spoofing</i> or <i>double tagging</i>.</p>
+                    <h3>Switch Spoofing</a></h3>
+                    <p>Let's just mention that switches that communicate together can be setup to use a port and therefore a link between themselves as a trunk link. This means that any traffic passing over the trunk will be comprised of all and any VLANs. This is not good because an attacker could for example persuade a switch to turn on trunking for a particular port, and thereby see the traffic for all VLANs. Anything could be passing up and down that trunk, usernames, passwords, etc.</p>
+                    <p>Did you know that some switches put their ports in <i>auto mode</i> for trunking? Not good! I could send a cleverly crafted DTP (Dynamic Trunking Protocol) Frame that the switch won't be able to resist. When it does, I now have a trunk port and trunking access on that port. Or, what if I connected a rogue switch? That would have the same effect. As soon as I plugged it into the network, connecting it by a crossover cable to another switch with <i>auto mode</i> on, then it will just simply open up a nice trunk for me. So, <i>auto mode</i> is not safe. we should disable trunking on all ports and while we are at it we can also disable DTP.</p>
+                    <p>[code]<br />Switch(config)# interface range fa0/1-24<br />Switch(config-if)# switchport mode access<br />Switch(config-if)# switchport nonegotiate<br />[/code]<br />Now if I want to have a port as a trunk port, I have to explicitly configure it.</p>
+                    <h3>Double Tagging</h3>
+                    <p><img src="assets/images/double-dip.jpg" alt="double dip"></p>
+                    <p>In 802.1q trunking, there is a native VLAN. This VLAN does not tag Frames. If I can place a computer on the native VLAN, and if I knew how, I could send a Frame with 2 tags (double dipping, just like George above). In the Frame there would be an inner and an outer tag. The switch won't examine the inner tag. This tag could potentially specify the VLAN I want to hack.</p>
+                    <h3>Spanning Tree Protocol</h3>
+                    <p>Eliminates loops! ensuring all physical loops are taken down. It does this by electing a <i>root bridge</i>, the head honcho! If I have 2 or more switches connected together, then the one with the lowest bridge priority (customizable integer value between 1-65536) is elected as the root bridge. The default value for all Catalyst switches is 32768. When two switches have the same priority then the switch with the lowest MAC address wins. So by default, the MAC address is the deciding factor. To manually elect a root bridge we can use the following methods from global configuration mode.</p>
+                    <ul>
+                    <li>spanning-tree vlan <i>vlan-id</i> root primary</li>
+                    <li>spanning-tree vlan <i>vlan-id</i> root secondary</li>
+                    <li>spanning-tree vlan <i>vlan-id</i> priority 24576</li>
+                    </ul>
+                    <h4>The Attack?</h4>
+                    <p>If an attacker gains physical access to the network and plugs in a switch, the attacker can configure the switch with a lower priority than the root bridge. This cause the rogue switch to send out BPDUs (Bridge Protocol Data Units) telling everyone "Hey! I'm the new superior bridge" and the other switches will comply. Then the attacker can just open a port on the rogue switch as a SPAN (Switch Port Analyzer) port in order to receive all traffic.</p>
+                    <h4>Prevention?</h4>
+                    <p>There are at least 2 methods:</p>
+                    <p><b>Root Guard!</b> Remember that. Root guard on all ports except the root port. The root port or ports, on the root bridge are the ports that connect to other switches. Now that root guard running, instead of believing a superior BPDU as being legitimate, the switch goes into <i>root-inconsistant</i> state. But as soon as superior BPDUs stop coming in, the port returns to the forwarding state.</p>
+                    <p> </p>
+                    <p>We will discover that the second method is to turn on <b>BPDU Guard</b> on ports that have been configured with something called <i>portfast</i>. The purpose of <i>portfast</i> is to speed up the process of ports getting to the forwarding state. We typically turn on <i>portfast</i> on links to end user devices so they don't have to wait around for the switch port to go through it's regular transition of STP listening and learning stages.</p>
+				  </div>
+				</div>
+		<!-- post item -->
+		</div><!-- card -->
+		<hr>
+	</main><!-- see, told you ! -->
+	<footer class="footer">
+  <h4>Let me Design for you <a href="mailto:"brnagn7@gmail.com"><i class="fa fa-envelope"></i></a></h4>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/html5.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CODE</h1>
+					</div>
+					<div class="back">
+						 <h2>HTML5</h2>
+						 <p>Brings new elements, attributes, and behaviors, and a larger set of technologies that allows the building of more diverse and powerful Web sites and applications.</p>
+					</div>
+			</div>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/css3.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CSS</h1>
+					</div>
+					<div class="back">
+						 <h2>CSS3</h2>
+						 <p>CSS3 brings a lot of long-awaited novelties, like rounded corners, shadows, gradients, transitions or animations, as well as new layouts like multi-columns, flexible box or grid layouts.</p>
+					</div>
+			</div>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/js.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CODE</h1>
+					</div>
+					<div class="back">
+						 <h2>Javascript</h2>
+						 <p>When a user requests an HTML page with JavaScript in it, the script is sent to the browser and it's up to the browser to do something with it.</p>
+					</div>
+			</div>
+			
+	</footer>
+	<!-- good practice to put your JS down here -->
+	<script src="assets/js/functions.js"></script>
+</body>
+</html>

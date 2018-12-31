@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Using PPP (Point-to-Point) Protocol</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+	<header class="header">
+	<h1>Spyderops Designs</h1>
+		<h2>A fully responsive site using CSS Grid</h2>
+	</header>
+	<div class="topnav" id="topBar">
+	<a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+		<a href="#" class="news"><i class="fas fa-newspaper"></i> News</a>
+		<a href="#" class="contact"><i class="fas fa-envelope-square"></i> Contact</a>
+		<a href="#" class="about"><i class="fas fa-user"></i> About</a>
+				<div class="search-container">
+				<input type="text" placeholder="Search..">
+				<button type="submit">Go</button>
+				<a href="javascript:void(0);" class="icon" onClick="hamburger()">More</a>
+				</div><!-- search-container -->
+	</div><!-- topnav -->
+	<!-- main finishes just above the footer - way on down there :) -->
+	<main class=".grid-container .single-page-gc">
+
+	<section class="post">
+		<div class="card">
+		<!-- post item -->
+				<div class="single-page-post-item">
+				  <div>
+                    <h1 id="top">Learn How to Use PPP</h1>
+                    <div class="thumbnail single-page-tn"><img class="left" src="assets/images/router-sm.jpg"/></div>
+                    <div class="separator"></div>
+                    <h3>Authentication</h3>
+<p>PPP (point-to-point protocol) authentication is possible through one of two methods. PAP (Password Authentication Protocol) and CHAP (Challenge Handshake Authentication Protocol). Of the two, PAP is the easiest to implement and understand but has it's limits due to the fact that it transmits it's password in clear text. CHAP on the other hand uses a more secure algorithm that does not send passwords. You can read more about the methods in <a href="https://www.ietf.org/rfc/rfc1334.txt">RFC 1334</a>.  The video below uses two routers to demonstrate how this is done.</p>
+<p><video poster="https://s3.amazonaws.com/spops-videos/ppp.png" controls="controls" width="640" height="360"><source src="https://dx0eq1bgy2kpm.cloudfront.net/PPP-1-version-2.mov" type="video/mp4" /></video></p>
+
+				  </div>
+				</div>
+		<!-- post item -->
+		</div><!-- card -->
+		<hr>
+	</main><!-- see, told you ! -->
+	<footer class="footer">
+	<h4>Let me Design for you <a href="mailto:"brnagn7@gmail.com"><i class="fa fa-envelope"></i></a></h4>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/html5.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CODE</h1>
+					</div>
+					<div class="back">
+						 <h2>HTML5</h2>
+						 <p>Brings new elements, attributes, and behaviors, and a larger set of technologies that allows the building of more diverse and powerful Web sites and applications.</p>
+					</div>
+			</div>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/css3.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CSS</h1>
+					</div>
+					<div class="back">
+						 <h2>CSS3</h2>
+						 <p>CSS3 brings a lot of long-awaited novelties, like rounded corners, shadows, gradients, transitions or animations, as well as new layouts like multi-columns, flexible box or grid layouts.</p>
+					</div>
+			</div>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/js.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CODE</h1>
+					</div>
+					<div class="back">
+						 <h2>Javascript</h2>
+						 <p>When a user requests an HTML page with JavaScript in it, the script is sent to the browser and it's up to the browser to do something with it.</p>
+					</div>
+			</div>
+			
+	</footer>
+	<!-- good practice to put your JS down here -->
+	<script src="assets/js/functions.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Using SSH to Secure WiFi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+	<header class="header">
+	<h1>Spyderops Designs</h1>
+		<h2>A fully responsive site using CSS Grid</h2>
+	</header>
+	<div class="topnav" id="topBar">
+	<a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+		<a href="#" class="news"><i class="fas fa-newspaper"></i> News</a>
+		<a href="#" class="contact"><i class="fas fa-envelope-square"></i> Contact</a>
+		<a href="#" class="about"><i class="fas fa-user"></i> About</a>
+				<div class="search-container">
+				<input type="text" placeholder="Search..">
+				<button type="submit">Go</button>
+				<a href="javascript:void(0);" class="icon" onClick="hamburger()">More</a>
+				</div><!-- search-container -->
+	</div><!-- topnav -->
+	<!-- main finishes just above the footer - way on down there :) -->
+	<main class=".grid-container .single-page-gc">
+
+	<section class="post">
+		<div class="card">
+		<!-- post item -->
+				<div class="single-page-post-item">
+				  <div>
+                    <h1 id="top">Using SSH to Secure WiFi</h1>
+                    <div class="thumbnail single-page-tn"><img class="left" src="assets/images/wifi-sm.jpg"/></div>
+                    <div class="separator"></div>
+                    <p>Say you are at McDonalds and you have your laptop with you to browse the Internet through the free Wi-Fi, it's a good idea to use an encryption tunnel to your home router using SSH (Secure Shell). If you'd like to also know about <a href="http://localhost:8888/wordpress/open-ssh-best-practices/">OpenSSH</a> then I have that covered <a href="http://localhost:8888/wordpress/open-ssh-best-practices/">here</a>. That way your traffic is routed through this tunnel directly from your laptop to your home router.</p>
+                    <p>The router is conducting <strong>port forwarding</strong> by passing packets on to your home ssh server running linux. This tunnel is protected from Wi-Fi sniffers who would see nothing but encrypted data.</p>
+<p>Now it won't matter how shoddy the Wi-Fi source is, McDonalds or even at an Airport for that matter, because your data is inside an encrypted tunnel.</p>
+<p>Since you are running from a shell you can run the text browser <a href="http://lynx.browser.org/">lynx</a> and the text email program <a href="http://www.mutt.org">mutt</a>, thereby surfing like a nerd. Nice!</p>
+<p>So in my example, I am using Kali linux as the ssh server, that means I will have shell access to the system. I have set it up to log in as a normal user and not the root account. Here's how with line 3 adding the user to the sudo group:</p>
+<pre># useradd -m spoon
+# passwd spoon
+# usermod -a -G sudo spoon
+# chsh -s /bin/bash spoon
+</pre>
+<p>The laptop is using the free Wi-Fi at McDonalds to access the internet. The connection goes to my home router. Therefore, the link from the Laptop in McDonalds, to the home router, is encrypted. To make this work I configured my home router to port forward <strong>ssh</strong> connections to an inside private ip address on my network. From there the connection goes back out through my home router to the internet unencrypted. At least I feel safer when using the free Wi-Fi because no one can eave's drop on my activity.</p>
+<p><iframe src="https://www.youtube.com/embed/tYCKQhZ50HM" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="page-thumbnail"><img src="assets/images/ssh2.png" alt="ssh topology"></div>
+
+				  </div>
+				</div>
+		<!-- post item -->
+		</div><!-- card -->
+		<hr>
+	</main><!-- see, told you ! -->
+	<footer class="footer">
+	<h4>Let me Design for you <a href="mailto:"brnagn7@gmail.com"><i class="fa fa-envelope"></i></a></h4>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/html5.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CODE</h1>
+					</div>
+					<div class="back">
+						 <h2>HTML5</h2>
+						 <p>Brings new elements, attributes, and behaviors, and a larger set of technologies that allows the building of more diverse and powerful Web sites and applications.</p>
+					</div>
+			</div>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/css3.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CSS</h1>
+					</div>
+					<div class="back">
+						 <h2>CSS3</h2>
+						 <p>CSS3 brings a lot of long-awaited novelties, like rounded corners, shadows, gradients, transitions or animations, as well as new layouts like multi-columns, flexible box or grid layouts.</p>
+					</div>
+			</div>
+			<div class="flip">
+					<div class="front" style="background-image: url(assets/images/js.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+						 <h1 class="text-shadow">CODE</h1>
+					</div>
+					<div class="back">
+						 <h2>Javascript</h2>
+						 <p>When a user requests an HTML page with JavaScript in it, the script is sent to the browser and it's up to the browser to do something with it.</p>
+					</div>
+			</div>
+			
+	</footer>
+	<!-- good practice to put your JS down here -->
+	<script src="assets/js/functions.js"></script>
+</body>
+</html>
